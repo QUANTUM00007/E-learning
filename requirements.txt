@@ -8,3 +8,6 @@ pymemcache
 django-debug-toolbar
 redis
 django-redisboard
+attrs
+djangorestframework
+requests
