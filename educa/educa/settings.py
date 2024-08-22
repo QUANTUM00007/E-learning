@@ -46,6 +46,9 @@ INSTALLED_APPS = [
     'debug_toolbar',
     'redisboard',
     'rest_framework',
+    'chat',
+    'channels',
+    
 ]
 
 MIDDLEWARE = [
@@ -145,16 +148,27 @@ CACHES = {
     }
 }
 
-INTERNAL_IPS = [
-    '127.0.0.1',
-]
-
 CACHE_MIDDLEWARE_ALIAS = 'default',
 CACHE_MIDDLEWARE_SECONDS = 60 * 15 # 15 MINUTES
 CACHE_MIDDLEWARE_KEY_PREFIX = 'educa'
+
+INTERNAL_IPS = [
+    '127.0.0.1',
+]
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
     ]
+}
+
+ASGI_APPLICATION = 'educa.asgi.application'
+
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            'hosts': [('127.0.0.1', 6379)],
+        },
+    },
 }
